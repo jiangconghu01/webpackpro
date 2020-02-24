@@ -39,9 +39,15 @@ module.exports = {
           'pages': path.join(__dirname, "../src/pages")
         }
       },
+      externals: {
+          'vue': 'Vue',
+          'vue-router': 'VueRouter',
+          'vuex': 'Vuex',
+          'echarts': 'echarts',
+          'axios': 'axios'
+      },
       optimization:{
-        splitChunks: {  //分割代码块
-
+        splitChunks: {  
           cacheGroups: {  //缓存组 缓存公共代码
 
               commons: {  
@@ -57,7 +63,7 @@ module.exports = {
                    minSize: 0,
                     minChunks: 1, 
                     chunks: 'initial',
-                    priority: 2 
+                    priority: 10 
              }
           }
        }
@@ -74,6 +80,7 @@ module.exports = {
         {
             test: /\.scss$/,
             use: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                'cache-loader',
                 'css-loader',
                 {
                   loader:'postcss-loader',
@@ -87,7 +94,7 @@ module.exports = {
         {   
             test: /\.js$/,
             exclude: /(node_modules|bower_components)/,
-            use: {
+            use: ['cache-loader',{
               loader: 'babel-loader',
               options: {
                 presets:[
@@ -95,7 +102,7 @@ module.exports = {
                 ],
                 plugins:["@babel/plugin-transform-runtime",'@babel/plugin-syntax-dynamic-import']
               }
-            }            
+            }]          
         },
         {
           test:/\.vue$/,
@@ -103,12 +110,18 @@ module.exports = {
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/,
-          use: [{
+          use: ['cache-loader',{
             loader: 'url-loader',
             options: {
               esModule: false,
               limit: 1024 * 3, // 3k一下的图片转为bs64编码
               name: 'resources/[name].[hash:8].[ext]'
+            }
+          },
+          {	// 压缩图片
+            loader: 'image-webpack-loader',
+            options: {
+              disable: false
             }
           }
           ]

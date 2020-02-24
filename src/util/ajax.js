@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 import qs from 'qs'
 import store_comp from '../store/competionstore.js'
 // import store from '../store/store.js';
