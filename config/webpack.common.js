@@ -44,7 +44,8 @@ module.exports = {
           'vue-router': 'VueRouter',
           'vuex': 'Vuex',
           'echarts': 'echarts',
-          'axios': 'axios'
+          'axios': 'axios',
+          'BMap':'BMap'
       },
       optimization:{
         splitChunks: {  
@@ -110,7 +111,8 @@ module.exports = {
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/,
-          use: ['cache-loader',{
+          //use: ['cache-loader',{
+          use: [{
             loader: 'url-loader',
             options: {
               esModule: false,
