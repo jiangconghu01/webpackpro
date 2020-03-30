@@ -2,12 +2,6 @@ const option = {
     tooltip: {
         trigger: 'axis'
     },
-    // legend: {
-    //     color: ["#F58080", "#47D8BE", "#F9A589"],
-    //     data: ['平均产能', '最高产能', '最低产能'],
-    //     left: 'center',
-    //     bottom: 'bottom'
-    // },
     grid: {
         top: 'middle',
         left: '3%',
